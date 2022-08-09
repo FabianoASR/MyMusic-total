@@ -1,0 +1,52 @@
+2022-08-02 11:20:26,256 INFO org.springframework.boot.StartupInfoLogger [main] Starting SummitBootcampApplication using Java 11.0.15 on lnb035703cps with PID 103068 (/home/fabianosr/projetct-myMusic-toTal/MyMusic/target/classes started by CIANDT\fabianosr in /home/fabianosr/projetct-myMusic-toTal/MyMusic)
+2022-08-02 11:20:26,259 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2022-08-02 11:20:27,182 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-08-02 11:20:27,234 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 44 ms. Found 5 JPA repository interfaces.
+2022-08-02 11:20:27,860 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2022-08-02 11:20:27,868 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2022-08-02 11:20:27,869 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2022-08-02 11:20:27,869 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-08-02 11:20:27,942 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2022-08-02 11:20:27,943 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1640 ms
+2022-08-02 11:20:28,334 INFO org.ehcache.core.EhcacheManager [main] Cache 'buscarMusicas' created in EhcacheManager.
+2022-08-02 11:20:28,344 INFO org.ehcache.jsr107.Eh107CacheManager [main] Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=urn.X-ehcache.jsr107-default-config,Cache=buscarMusicas
+2022-08-02 11:20:28,351 INFO org.ehcache.jsr107.Eh107CacheManager [main] Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=urn.X-ehcache.jsr107-default-config,Cache=buscarMusicas
+2022-08-02 11:20:28,451 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-08-02 11:20:28,512 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.6.4.Final
+2022-08-02 11:20:28,688 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-08-02 11:20:28,761 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+2022-08-02 11:20:29,404 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-08-02 11:20:29,411 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 11:20:29,853 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-08-02 11:20:30,906 INFO org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver [main] Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-08-02 11:20:30,943 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2022-08-02 11:20:30,955 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2022-08-02 11:20:30,968 INFO org.springframework.boot.StartupInfoLogger [main] Started SummitBootcampApplication in 5.095 seconds (JVM running for 5.757)
+2022-08-02 11:22:14,753 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 11:22:14,756 INFO org.ehcache.core.EhcacheManager [SpringApplicationShutdownHook] Cache 'buscarMusicas' removed from EhcacheManager.
+2022-08-02 11:22:17,714 INFO org.springframework.boot.StartupInfoLogger [main] Starting SummitBootcampApplication using Java 11.0.15 on lnb035703cps with PID 103435 (/home/fabianosr/projetct-myMusic-toTal/MyMusic/target/classes started by CIANDT\fabianosr in /home/fabianosr/projetct-myMusic-toTal/MyMusic)
+2022-08-02 11:22:17,720 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2022-08-02 11:22:18,765 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-08-02 11:22:18,815 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 42 ms. Found 5 JPA repository interfaces.
+2022-08-02 11:22:19,428 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2022-08-02 11:22:19,441 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2022-08-02 11:22:19,442 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2022-08-02 11:22:19,443 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-08-02 11:22:19,529 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2022-08-02 11:22:19,530 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1764 ms
+2022-08-02 11:22:19,956 INFO org.ehcache.core.EhcacheManager [main] Cache 'buscarMusicas' created in EhcacheManager.
+2022-08-02 11:22:19,966 INFO org.ehcache.jsr107.Eh107CacheManager [main] Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=urn.X-ehcache.jsr107-default-config,Cache=buscarMusicas
+2022-08-02 11:22:19,973 INFO org.ehcache.jsr107.Eh107CacheManager [main] Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=urn.X-ehcache.jsr107-default-config,Cache=buscarMusicas
+2022-08-02 11:22:20,065 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-08-02 11:22:20,103 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.6.4.Final
+2022-08-02 11:22:20,218 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-08-02 11:22:20,271 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+2022-08-02 11:22:20,805 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-08-02 11:22:20,812 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 11:22:21,305 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-08-02 11:22:22,408 INFO org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver [main] Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-08-02 11:22:22,439 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2022-08-02 11:22:22,454 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2022-08-02 11:22:22,470 INFO org.springframework.boot.StartupInfoLogger [main] Started SummitBootcampApplication in 5.113 seconds (JVM running for 5.607)
+2022-08-02 13:34:41,017 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-08-02 13:34:41,020 INFO org.ehcache.core.EhcacheManager [SpringApplicationShutdownHook] Cache 'buscarMusicas' removed from EhcacheManager.

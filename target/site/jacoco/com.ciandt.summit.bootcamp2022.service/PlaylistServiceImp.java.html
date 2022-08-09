@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlaylistServiceImp.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">summit-bootcamp</a> &gt; <a href="index.source.html" class="el_package">com.ciandt.summit.bootcamp2022.service</a> &gt; <span class="el_source">PlaylistServiceImp.java</span></div><h1>PlaylistServiceImp.java</h1><pre class="source lang-java linenums">package com.ciandt.summit.bootcamp2022.service;
+
+import com.ciandt.summit.bootcamp2022.controller.request.PlaylistRequest;
+import com.ciandt.summit.bootcamp2022.entity.*;
+import com.ciandt.summit.bootcamp2022.exception.*;
+import com.ciandt.summit.bootcamp2022.model.MusicaDTO;
+import com.ciandt.summit.bootcamp2022.repository.PlaylistMusicaRepository;
+import com.ciandt.summit.bootcamp2022.repository.PlaylistRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L17">public class PlaylistServiceImp implements PlaylistService {</span>
+
+<span class="fc" id="L19">    private static final Logger logger = LoggerFactory.getLogger(PlaylistServiceImp.class);</span>
+
+    @Autowired
+    private PlaylistRepository playlistRepository;
+    @Autowired
+    private PlaylistMusicaRepository playlistMusicaRepository;
+    @Autowired
+    private MusicaServiceImp musicaServiceImp;
+
+    @Autowired
+    private UsuarioServiceImp usuarioServiceImp;
+
+    @Override
+    public PlaylistMusica adicionarMusicaNaPlaylist(String playlistId, PlaylistRequest musicaRequest) {
+<span class="fc" id="L33">        buscarPlaylistPorId(playlistId);</span>
+
+<span class="fc" id="L35">        Musica musicaDb = musicaServiceImp.buscarMusicaPorId(musicaRequest.getData().getId());</span>
+
+<span class="fc" id="L37">        validarPayloadBodyRequest(musicaRequest.getData(), musicaDb);</span>
+
+<span class="fc" id="L39">        Optional&lt;PlaylistMusica&gt; relacaoPlaylistMusica = playlistMusicaRepository.findByPlaylistIdAndMusicaId(playlistId, musicaRequest.getData().getId());</span>
+
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (relacaoPlaylistMusica.isPresent()) {</span>
+<span class="nc" id="L42">            throw new NaoPermitidoSalvarAMesmaMusicaException(&quot;Música duplicada.&quot;);</span>
+        }
+
+<span class="fc" id="L45">        PlaylistMusica playlistMusica = new PlaylistMusica(new PlaylistMusicaKey(playlistId, musicaRequest.getData().getId()));</span>
+
+<span class="fc" id="L47">        playlistMusicaRepository.save(playlistMusica);</span>
+
+<span class="fc" id="L49">        return playlistMusica;</span>
+    }
+
+    public void validarPayloadBodyRequest(MusicaDTO musicaRequest, Musica musicaDb) {
+<span class="fc" id="L53">        logger.info(&quot;Validando payload do RequestBody&quot;);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (!musicaDb.getNome().equalsIgnoreCase(musicaRequest.getNome())</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">                || !musicaDb.getArtista().getId().equals(musicaRequest.getArtista().getId())</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">                || !musicaDb.getArtista().getNome().equals(musicaRequest.getArtista().getNome())) {</span>
+<span class="fc" id="L57">            logger.error(&quot;Payload inválido.&quot;);</span>
+<span class="fc" id="L58">            throw new PayloadBodyInvalidoException(musicaRequest.getId());</span>
+        }
+<span class="fc" id="L60">    }</span>
+
+    @Override
+    public Playlist buscarPlaylistPorId(String playlistId) {
+<span class="fc" id="L64">        logger.info(&quot;Buscando playlist com id: &quot; + playlistId);</span>
+<span class="fc" id="L65">        return playlistRepository.findById(playlistId).orElseThrow(() -&gt; new PlaylistNaoExisteException(playlistId));</span>
+    }
+
+    @Override
+    public void removerMusicaFromPlaylist(String playlistId, String musicaId) {
+<span class="fc" id="L70">        Playlist playlist = buscarPlaylistPorId(playlistId);</span>
+<span class="fc" id="L71">        Musica musica = musicaServiceImp.buscarMusicaPorId(musicaId);</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (playlistMusicaRepository.findByPlaylistIdAndMusicaId(playlistId, musicaId).isPresent()) {</span>
+<span class="fc" id="L73">            playlistMusicaRepository.deleteById(new PlaylistMusicaKey(playlistId, musicaId));</span>
+        } else {
+<span class="nc" id="L75">            throw new PlaylistNaoContemMusicaException(playlistId + &quot; &quot; + musicaId);</span>
+        }
+<span class="fc" id="L77">        logger.info(&quot;Removendo a musica &quot; + musica + &quot; da playlist &quot; + playlist.getId());</span>
+<span class="fc" id="L78">    }</span>
+
+    @Override
+    public PlaylistMusica adicionarMusicaNaPlaylistUsuario(String playlistId, PlaylistRequest musicaRequest, String usuarioId) {
+<span class="fc" id="L82">        buscarPlaylistPorId(playlistId);</span>
+
+<span class="fc" id="L84">        Usuario usuario = usuarioServiceImp.buscarUsuario(usuarioId);</span>
+
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if(!usuario.getPlaylist().getId().equals(playlistId)){</span>
+<span class="fc" id="L87">            throw new PlaylistNaoExisteException(playlistId);</span>
+        }
+
+<span class="pc bpc" id="L90" title="1 of 4 branches missed.">        if(usuario.getTipoUsuario().equals(TipoUsuarioEnum.COMUM) &amp;&amp; playlistMusicaRepository.quantidadeMusica(usuarioId) &gt;=5){</span>
+<span class="fc" id="L91">            throw new ValidarQuantidadeMusica(usuarioId);</span>
+        }
+
+<span class="fc" id="L94">        Musica musicaDb = musicaServiceImp.buscarMusicaPorId(musicaRequest.getData().getId());</span>
+
+<span class="fc" id="L96">        validarPayloadBodyRequest(musicaRequest.getData(), musicaDb);</span>
+
+<span class="fc" id="L98">        Optional&lt;PlaylistMusica&gt; relacaoPlaylistMusica = playlistMusicaRepository.findByPlaylistIdAndMusicaId(playlistId, musicaRequest.getData().getId());</span>
+
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (relacaoPlaylistMusica.isPresent()) {</span>
+<span class="nc" id="L101">            throw new NaoPermitidoSalvarAMesmaMusicaException(&quot;Música duplicada.&quot;);</span>
+        }
+
+<span class="fc" id="L104">        PlaylistMusica playlistMusica = new PlaylistMusica(new PlaylistMusicaKey(playlistId, musicaRequest.getData().getId()));</span>
+
+<span class="fc" id="L106">        playlistMusicaRepository.save(playlistMusica);</span>
+
+<span class="fc" id="L108">        return playlistMusica;</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

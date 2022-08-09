@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlaylistController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">summit-bootcamp</a> &gt; <a href="index.source.html" class="el_package">com.ciandt.summit.bootcamp2022.controller</a> &gt; <span class="el_source">PlaylistController.java</span></div><h1>PlaylistController.java</h1><pre class="source lang-java linenums">package com.ciandt.summit.bootcamp2022.controller;
+
+import com.ciandt.summit.bootcamp2022.controller.request.PlaylistRequest;
+import com.ciandt.summit.bootcamp2022.entity.Playlist;
+import com.ciandt.summit.bootcamp2022.service.PlaylistServiceImp;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+
+@RestController
+@RequestMapping(&quot;/api/playlists&quot;)
+<span class="fc" id="L18">public class PlaylistController {</span>
+
+<span class="fc" id="L20">    private static final Logger logger = LoggerFactory.getLogger(PlaylistController.class);</span>
+
+    @Autowired
+    private PlaylistServiceImp playlistServiceImp;
+
+    @PostMapping(&quot;/{playlistId}/musicas&quot;)
+    @Operation(summary = &quot;Responsável por adicionar uma música no playlist.&quot;, security = @SecurityRequirement(name = &quot;basicAuth&quot;))
+    public ResponseEntity&lt;Playlist&gt; adicionarMusicaPlaylist(@PathVariable String playlistId, @RequestBody PlaylistRequest musica){
+<span class="fc" id="L28">        logger.info(&quot;Executando POST - /playlists/&quot; + playlistId + &quot;/musicas&quot;);</span>
+<span class="fc" id="L29">        playlistServiceImp.adicionarMusicaNaPlaylist(playlistId, musica);</span>
+
+<span class="fc" id="L31">        logger.info(&quot;Música Adicionada - 201 OK&quot;);</span>
+<span class="fc" id="L32">        return new ResponseEntity&lt;Playlist&gt;(HttpStatus.CREATED);</span>
+    }
+
+    @DeleteMapping(&quot;/{playlistId}/musicas/{musicaId}&quot;)
+    @Operation(summary = &quot;Responsável por remover uma música no playlist.&quot;, security = @SecurityRequirement(name = &quot;basicAuth&quot;))
+    public ResponseEntity&lt;Playlist&gt; removerMusicaPlaylist(@PathVariable String playlistId, @PathVariable String musicaId){
+<span class="fc" id="L38">        logger.info(&quot;Executando DELETE - /playlists/&quot; + playlistId + &quot;/musicas&quot; + musicaId);</span>
+<span class="fc" id="L39">        playlistServiceImp.removerMusicaFromPlaylist(playlistId,musicaId);</span>
+
+<span class="fc" id="L41">        logger.info(&quot;Música removida - 200 OK&quot;);</span>
+<span class="fc" id="L42">        return new ResponseEntity&lt;Playlist&gt;(HttpStatus.OK);</span>
+    }
+
+    @PostMapping(&quot;/{playlistId}/musicas/{usuarioId}&quot;)
+    @Operation(summary = &quot;Responsável por adicionar uma música no playlist do usuário.&quot;, security = @SecurityRequirement(name = &quot;basicAuth&quot;))
+    public ResponseEntity&lt;Playlist&gt; adicionarMusicaPlaylistUsuario(@PathVariable String playlistId,  @RequestBody PlaylistRequest musica, @PathVariable String usuarioId){
+<span class="nc" id="L48">        logger.info(&quot;Executando POST - /playlists/&quot; + playlistId + &quot;/musicas/&quot; + usuarioId);</span>
+<span class="nc" id="L49">        playlistServiceImp.adicionarMusicaNaPlaylistUsuario(playlistId, musica, usuarioId);</span>
+
+<span class="nc" id="L51">        logger.info(&quot;Música Adicionada - 201 OK&quot;);</span>
+<span class="nc" id="L52">        return new ResponseEntity&lt;Playlist&gt;(HttpStatus.CREATED);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

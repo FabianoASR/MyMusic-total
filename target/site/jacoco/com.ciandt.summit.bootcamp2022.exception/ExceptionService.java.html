@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExceptionService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">summit-bootcamp</a> &gt; <a href="index.source.html" class="el_package">com.ciandt.summit.bootcamp2022.exception</a> &gt; <span class="el_source">ExceptionService.java</span></div><h1>ExceptionService.java</h1><pre class="source lang-java linenums">package com.ciandt.summit.bootcamp2022.exception;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+<span class="fc" id="L11">public class ExceptionService {</span>
+
+<span class="fc" id="L13">    private static final Logger logger = LoggerFactory.getLogger(ExceptionService.class);</span>
+
+    @ExceptionHandler(FiltroInvalidoException.class)
+    ResponseEntity&lt;FiltroInvalidoException&gt; handleException(FiltroInvalidoException err){
+<span class="nc" id="L17">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L18">        uer.setStatus(HttpStatus.BAD_REQUEST.value());</span>
+<span class="nc" id="L19">        uer.setMessage(&quot;O filtro utilizado na busca (&quot;+err.getMessage()+&quot;) tem menos de 3 caracteres.&quot;);</span>
+<span class="nc" id="L20">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.BAD_REQUEST);</span>
+<span class="nc" id="L21">        return new ResponseEntity(uer,HttpStatus.BAD_REQUEST);</span>
+    }
+
+    @ExceptionHandler(MusicaNaoEncontradaException.class)
+    ResponseEntity&lt;MusicaNaoEncontradaException&gt; handleException(MusicaNaoEncontradaException err){
+<span class="nc" id="L26">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L27">        uer.setStatus(HttpStatus.NO_CONTENT.value());</span>
+<span class="nc" id="L28">        uer.setMessage(&quot;A busca realizada não retornou nenhum resultado!&quot;);</span>
+<span class="nc" id="L29">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.NO_CONTENT);</span>
+<span class="nc" id="L30">        return new ResponseEntity(uer,HttpStatus.NO_CONTENT);</span>
+    }
+
+    @ExceptionHandler(UsuarioNaoAutorizadoException.class)
+    ResponseEntity&lt;UserErrorResponse&gt; handleException(UsuarioNaoAutorizadoException err){
+<span class="nc" id="L35">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L36">        uer.setStatus(HttpStatus.FORBIDDEN.value());</span>
+<span class="nc" id="L37">        uer.setMessage(err.getMessage());</span>
+<span class="nc" id="L38">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.FORBIDDEN);</span>
+<span class="nc" id="L39">        return new ResponseEntity(uer,HttpStatus.FORBIDDEN);</span>
+    }
+
+    @ExceptionHandler(NaoPermitidoSalvarAMesmaMusicaException.class)
+    ResponseEntity&lt;UserErrorResponse&gt; handleException(NaoPermitidoSalvarAMesmaMusicaException err){
+<span class="nc" id="L44">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L45">        uer.setStatus(HttpStatus.FORBIDDEN.value());</span>
+<span class="nc" id="L46">        uer.setMessage(&quot;Não é permitido salvar a mesma música duas vezes.&quot;);</span>
+<span class="nc" id="L47">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.FORBIDDEN);</span>
+<span class="nc" id="L48">        return new ResponseEntity(uer,HttpStatus.FORBIDDEN);</span>
+    }
+
+    @ExceptionHandler(MusicaNaoExisteException.class)
+    ResponseEntity&lt;MusicaNaoExisteException&gt; handleException(MusicaNaoExisteException err){
+<span class="nc" id="L53">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L54">        uer.setStatus(HttpStatus.BAD_REQUEST.value());</span>
+<span class="nc" id="L55">        uer.setMessage(&quot;A musica com o ID (&quot;+err.getMessage()+&quot;) não existe.&quot;);</span>
+<span class="nc" id="L56">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.BAD_REQUEST);</span>
+<span class="nc" id="L57">        return new ResponseEntity(uer,HttpStatus.BAD_REQUEST);</span>
+    }
+
+    @ExceptionHandler(PlaylistNaoExisteException.class)
+    ResponseEntity&lt;PlaylistNaoExisteException&gt; handleException(PlaylistNaoExisteException err){
+<span class="nc" id="L62">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L63">        uer.setStatus(HttpStatus.BAD_REQUEST.value());</span>
+<span class="nc" id="L64">        uer.setMessage(&quot;A playlist com o ID (&quot;+err.getMessage()+&quot;) não existe.&quot;);</span>
+<span class="nc" id="L65">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.BAD_REQUEST);</span>
+<span class="nc" id="L66">        return new ResponseEntity(uer,HttpStatus.BAD_REQUEST);</span>
+    }
+
+    @ExceptionHandler(PayloadBodyInvalidoException.class)
+    ResponseEntity&lt;PayloadBodyInvalidoException&gt; handleException(PayloadBodyInvalidoException err){
+<span class="nc" id="L71">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L72">        uer.setStatus(HttpStatus.BAD_REQUEST.value());</span>
+<span class="nc" id="L73">        uer.setMessage(&quot;Os dados inseridos não existem para a musica (&quot;+err.getMessage()+&quot;)&quot;);</span>
+<span class="nc" id="L74">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.BAD_REQUEST);</span>
+<span class="nc" id="L75">        return new ResponseEntity(uer,HttpStatus.BAD_REQUEST);</span>
+    }
+
+    @ExceptionHandler(PlaylistNaoContemMusicaException.class)
+    ResponseEntity&lt;PlaylistNaoContemMusicaException&gt; handleException(PlaylistNaoContemMusicaException err){
+<span class="nc" id="L80">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L81">        uer.setStatus(HttpStatus.NOT_FOUND.value());</span>
+<span class="nc" id="L82">        uer.setMessage(&quot;A playlist com o ID (&quot; + err.getMessage().split(&quot; &quot;)[0] + &quot;) não contém a música com o ID (&quot;+ err.getMessage().split(&quot; &quot;)[1] + &quot;).&quot;);</span>
+<span class="nc" id="L83">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.NOT_FOUND);</span>
+<span class="nc" id="L84">        return new ResponseEntity(uer,HttpStatus.NOT_FOUND);</span>
+    }
+
+    @ExceptionHandler(UsuarioNaoExisteException.class)
+    ResponseEntity&lt;UsuarioNaoExisteException&gt; handleException(UsuarioNaoExisteException err){
+<span class="nc" id="L89">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L90">        uer.setStatus(HttpStatus.NO_CONTENT.value());</span>
+<span class="nc" id="L91">        uer.setMessage(&quot;O não encontrado (&quot;+err.getMessage()+&quot;)&quot;);</span>
+<span class="nc" id="L92">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.NO_CONTENT);</span>
+<span class="nc" id="L93">        return new ResponseEntity(uer,HttpStatus.NO_CONTENT);</span>
+    }
+
+    @ExceptionHandler(ValidarQuantidadeMusica.class)
+    ResponseEntity&lt;ValidarQuantidadeMusica&gt; handleException(ValidarQuantidadeMusica err){
+<span class="nc" id="L98">        UserErrorResponse uer =new UserErrorResponse();</span>
+<span class="nc" id="L99">        uer.setStatus(HttpStatus.UNAUTHORIZED.value());</span>
+<span class="nc" id="L100">        uer.setMessage(&quot;Você atingiu o número máximo de músicas em sua playlist.Para adicionar mais músicas contrate o plano Premium. (&quot;+err.getMessage()+&quot;)&quot;);</span>
+<span class="nc" id="L101">        logger.error(uer.getMessage() + &quot; - &quot; + HttpStatus.UNAUTHORIZED);</span>
+<span class="nc" id="L102">        return new ResponseEntity(uer,HttpStatus.UNAUTHORIZED);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

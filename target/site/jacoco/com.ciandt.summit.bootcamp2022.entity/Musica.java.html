@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Musica.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">summit-bootcamp</a> &gt; <a href="index.source.html" class="el_package">com.ciandt.summit.bootcamp2022.entity</a> &gt; <span class="el_source">Musica.java</span></div><h1>Musica.java</h1><pre class="source lang-java linenums">package com.ciandt.summit.bootcamp2022.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+
+@Entity
+@Table(name = &quot;Musicas&quot;)
+public class Musica implements Comparable&lt;Musica&gt;{
+
+    @Id
+    private String id;
+    private String nome;
+    @OneToOne
+    @JoinColumn(name = &quot;ArtistaId&quot;)
+    private Artista artista;
+
+<span class="fc" id="L20">    public Musica() {</span>
+
+<span class="fc" id="L22">    }</span>
+
+<span class="fc" id="L24">    public Musica(String id, String nome, Artista artista) {</span>
+<span class="fc" id="L25">        this.id = id;</span>
+<span class="fc" id="L26">        this.nome = nome;</span>
+<span class="fc" id="L27">        this.artista = artista;</span>
+<span class="fc" id="L28">    }</span>
+
+    public String getId() {
+<span class="fc" id="L31">        return id;</span>
+    }
+
+    public void setId(String id) {
+<span class="fc" id="L35">        this.id = id;</span>
+<span class="fc" id="L36">    }</span>
+
+    public String getNome() {
+<span class="fc" id="L39">        return nome;</span>
+    }
+
+    public void setNome(String nome) {
+<span class="fc" id="L43">        this.nome = nome;</span>
+<span class="fc" id="L44">    }</span>
+
+    public Artista getArtista() {
+<span class="fc" id="L47">        return artista;</span>
+    }
+
+    public void setArtista(Artista artista) {
+<span class="fc" id="L51">        this.artista = artista;</span>
+<span class="fc" id="L52">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+
+<span class="nc" id="L59">        Musica musica = (Musica) o;</span>
+
+<span class="nc bnc" id="L61" title="All 4 branches missed.">        return id != null ? id.equals(musica.id) : musica.id == null;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">        return id != null ? id.hashCode() : 0;</span>
+    }
+
+    @Override
+    public int compareTo(Musica o) {
+<span class="fc" id="L71">        return this.nome.compareToIgnoreCase(o.nome);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L76">        return this.id + &quot; :: &quot; + this.nome;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
